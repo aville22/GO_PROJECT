@@ -1,8 +1,11 @@
 package calculations
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"github.com/aville22/greeneats/internal/models"
+)
 
-func CalculateCalories(weight, height, age float64, gender, goal string, activityLevel float64) ([]byte, error) {
+func CalculateCalories(profile models.ProfileForm) ([]byte, error) {
 	var bmr float64
 	type Result struct {
 		TotalCalories float64 `json:"total_calories"`
@@ -11,17 +14,17 @@ func CalculateCalories(weight, height, age float64, gender, goal string, activit
 		CarbGrams     float64 `json:"carb_grams"`
 	}
 	// Рассчитываем базовый метаболический коэффициент (BMR)
-	if gender == "male" {
-		bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
-	} else if gender == "female" {
-		bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)
+	if profile.Gender == "male" {
+		bmr = 88.362 + (13.397 * profile.Weight) + (4.799 * profile.Height) - (5.677 * profile.Age)
+	} else if profile.Gender == "female" {
+		bmr = 447.593 + (9.247 * profile.Weight) + (3.098 * profile.Height) - (4.330 * profile.Age)
 	}
 
 	// Умножаем BMR на коэффициент активности
-	totalCalories := bmr * activityLevel
+	totalCalories := bmr * profile.Activity
 
 	// Распределяем калории в зависимости от цели
-	switch goal {
+	switch profile.Goal {
 	case "weight_gain":
 		// Увеличиваем общее количество калорий для набора массы
 		totalCalories *= 1.1

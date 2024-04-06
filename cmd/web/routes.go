@@ -1,12 +1,11 @@
 package main
 
 import (
-	"github.com/aville22/greeneats/pkg/handlers"
+	"github.com/aville22/greeneats/internal/config"
+	"github.com/aville22/greeneats/internal/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"net/http"
-
-	"github.com/aville22/greeneats/pkg/config"
 )
 
 func routes(app *config.AppConfig) http.Handler {

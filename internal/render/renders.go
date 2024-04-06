@@ -2,10 +2,10 @@ package render
 
 import (
 	"bytes"
+	"github.com/aville22/greeneats/internal/config"
+	"github.com/aville22/greeneats/internal/models"
 	"github.com/justinas/nosurf"
 
-	"github.com/aville22/greeneats/pkg/config"
-	"github.com/aville22/greeneats/pkg/models"
 	"html/template"
 	"log"
 	"net/http"
